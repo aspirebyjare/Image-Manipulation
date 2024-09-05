@@ -1,12 +1,5 @@
-; *****************************************************************
-;  Name: Jared Smith
-;  NSHE_ID: 2000262757
-;  Section: 1002
-;  Assignment: 11
-;  Description: Becoming more familiar with system services and 
+; Description: Becoming more familiar with system services and 
 ;               processing images
-
-
 ; ***********************************************************************
 ;  Data declarations
 ;	Note, the error message strings should NOT be changed.

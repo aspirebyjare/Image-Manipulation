@@ -1,4 +1,4 @@
-// CS 218 - Provided C++ program
+//Provided C++ program
 //	This programs calls assembly language routines.
 
 //  Must ensure g++ compiler is installed:
