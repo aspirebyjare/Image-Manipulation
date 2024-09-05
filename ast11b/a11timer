@@ -1,0 +1,119 @@
+#!/bin/bash
+
+# Assignment #11, Part B execution timing script.
+#
+# -----------------------------------------------------
+# Initial checks.
+#	Ensure executable files exists.
+#	Ensure test files exists
+#
+if [ -z $1 ]; then
+	echo "Usage:  ./a11timer <asst11_LG_Buffer_Executable> <ass11_SM_Buffer_Excutable>"
+	exit
+fi
+#
+if [ -z $2 ]; then
+	echo "Error, must provide two executable file names."
+	exit
+fi
+#
+if [ ! -e $1 ] || [ ! -x $1 ]; then
+	echo "Error, unable to find assignment #11 A $1 executable file."
+	exit
+fi
+#
+if [ ! -e $2 ] || [ ! -x $2 ]; then
+	echo "Error, unable to find assignment #11 B $2 executable file."
+	exit
+fi
+#
+if [ ! -e coast1.bmp ]; then
+	echo "Error, unable to find input test files."
+	exit
+fi
+#
+# -----------------------------------------------------
+# Display header
+#
+bolded=`tput bold`
+normal=`tput sgr0`
+clear
+echo "###################################################################"
+echo -e "${bolded}Assignment #11 B -> Timed Executions${normal}\n"
+echo "Note, expected time is approx 60+ minutes..."
+echo
+#
+# -----------------------------------------------------
+# Large buffer tests
+#
+echo -e "-----------------------------------------"
+echo -e "Starting Large Buffer Timed Executions\\n"
+echo "***************************************" > a11btimes.txt
+echo -e "Large Buffer Timed Executions" >> a11btimes.txt
+echo -e "\\n-------------------" >> a11btimes.txt
+echo "Large Buffer, Timed Test #1" >> a11btimes.txt
+(time ./$1 -br coast1.bmp tmp1.bmp ) > null.txt 2>> a11btimes.txt
+#
+if `diff tmp1.bmp mstr1.bmp >/dev/null` ; then
+	echo "Large Buffer Test #1 Completed"
+else
+	echo -e "Test unsuccessful, results NOT valid\n"
+fi
+#
+echo -e "\\n-------------------" >> a11btimes.txt
+echo "Large Buffer, Timed Test #2" >> a11btimes.txt
+(time ./$1 -br coast1.bmp tmp2.bmp ) > null.txt 2>> a11btimes.txt
+#
+if `diff tmp2.bmp mstr1.bmp >/dev/null` ; then
+	echo "Large Buffer Test #2 Completed"
+else
+	echo -e "Test unsuccessful, results NOT valid\n"
+fi
+#
+rm tmp1.bmp
+rm tmp2.bmp
+rm null.txt
+#
+# -----------------------------------------------------
+# Small buffer tests
+#
+echo 
+echo -e "-----------------------------------------"
+echo -e "Starting Small Buffer Timed Executions\\n"
+echo -e "\\n\\n***************************************" >> a11btimes.txt
+echo -e "Small Buffer Timed Executions" >> a11btimes.txt
+echo -e "\\n-------------------" >> a11btimes.txt
+(time ./$2 -br coast1.bmp tmp1.bmp ) > null.txt 2>> a11btimes.txt
+#
+if `diff tmp1.bmp mstr1.bmp >/dev/null` ; then
+	echo "Small Buffer Test #1 Completed"
+else
+	echo -e "Test unsuccessful, results NOT valid\n"
+fi
+#
+echo -e "\\n-------------------" >> a11btimes.txt
+echo "Small Buffer, Timed Test #2" >> a11btimes.txt
+(time ./$2 -br coast1.bmp tmp2.bmp ) > null.txt 2>> a11btimes.txt
+#
+if `diff tmp2.bmp mstr1.bmp >/dev/null` ; then
+	echo "Small Buffer Test #2 Completed"
+else
+	echo -e "Test unsuccessful, results NOT valid\n"
+fi
+#
+echo  >> a11btimes.txt
+echo  >> a11btimes.txt
+#
+rm tmp1.bmp
+rm tmp2.bmp
+rm null.txt
+#
+# -----------------------------------------------------
+# Done
+#
+echo
+echo -e "-----------------------------------------"
+echo "Timed Tests completed."
+echo "See ${bolded}a11btimes.txt${normal} results."
+echo
+

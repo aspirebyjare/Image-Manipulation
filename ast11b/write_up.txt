@@ -1,0 +1,42 @@
+; *****************************************************************
+;  Name: Jared Smith
+;  NSHE_ID: 2000262757
+;  Section: 1002
+;  Assignment: 11 B
+;  Description: Become more familiar with input/output buffering concepts.
+
+
+*****************************************************************
+
+Machine Description:
+--------------------
+I am using a MacBook Pro with a M2 max chip, with processing speeds up to 12 x 3.72 GHz, 
+a 1 TB ssd and 32 GB of memory.
+
+Timing:
+-------
+Large Buffer
+Average Real Time:
+6.059
+
+Small Buffer
+Average Real Time:
+248.734
+
+Percentage Change:
+4005.198878%
+
+
+
+Explanation:
+------------
+The change in buffer size from 1,000,000 to 2 increased the wall clock time by a factor of 40. 
+It was the difference between [[bytes to be read] / 1,000,000 ] syscalls vs [[bytes to be read] / 2] syscalls. 
+When dealing with data to be read that has multiple millions of bytes the difference in efficiency of the two 
+methods is substantial. The test underscores the drastic increase in overhead that syscalls can have when called repetitively. 
+Going forward, I will always try to minimize the frequency of syscalls when dealing with exceedingly large iterative 
+indexes in loops.
+
+
+
+

@@ -1,0 +1,101 @@
+;----------------------------------------------
+; calling conventions
+;----------------------------------------------
+rdi
+rsi
+rdx
+rcx
+r8
+r9
+stack
+
+
+
+;----------------------------------------------
+; Get row 
+;----------------------------------------------
+;initializations:
+;    eof = false
+;    currIdx = BUFFSIZE
+;    buffMax = BUFFSIZE
+
+;i = 0
+;getNextByte:
+;    if(currIdx >= buffMax)
+;        if(eof)
+;            return false
+;        readFile(BUFFSIZE in bytes)
+;        if(read error)
+;            display error msg
+;            return false
+;        if(actualRd< request rd)
+;            eof = true
+;            buffMax = actualRd
+;        currIdx = 0
+;    chr = buffer[currIdx]
+;    currIdx ++
+;    rowBuffer[i]= chr
+;    i++
+;    ;is i> picwidth
+;    if (i<picwidth *3)
+;        jmp getNextByte
+    
+;return true 
+
+;----------------------------------------------
+; reading in
+;----------------------------------------------
+;    mov rax sys_read            ;non-interactive
+;    mov rdi, qword[inFileDesc]  ; where
+;    mov rsi, buffer             ; address
+;    mov rdx, BUFFSIZE           ; how much to get 
+
+;----------------------------------------------
+; GETARGUMENTS
+;----------------------------------------------
+;    Read/Check parameters (fileNames) from command line
+;        - must display error message
+;        -all error messages provided
+;        - a printString(str) function is provided
+;        -Eror check fileNames
+;            - attempt to open
+;                -if successful => is ok | return code in RAX
+;                -if fail => error       |return code in RAX
+;
+;                if open=> return file descriptors 
+
+;----------------------------------------------
+; System Services
+;----------------------------------------------
+;desc = fOpen(inFileName, AccMode)
+;    mov rax, sys_Open
+;    mov rdi, inFileName
+;    mov rsi, O_RDONLY
+;    syscall
+;    cmp rax, 0
+;    jl infileOpenErr
+;    mov qword[inFileDesc], rax
+;desc = fOpen/Create(outFileName, Accmode);
+;    mov rax, sys_creat
+;    mov rdi, outFileName
+;    mov rsi, S_IRUSR | S_IWUSR
+;    syscall
+;    cmp rax, 0
+;    jl outFileOpenErr
+;    mov qword[outFileDesc]
+
+
+;----------------------------------------------
+; code grade 11-A
+;----------------------------------------------
+ - there is something happening on the 10854 byte 
+    for mstrBRimage4 and mstrDKimage4
+
+    - potential problem for darken, not converting
+    all bits
+    - resolved
+        - identified difference in right side of image 
+          where conversion wasn't happening
+          -solution the darken and brighten loops run 
+           condition was based off of rdi(picwidth*3)-1
+           needed to be just picwidth
