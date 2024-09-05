@@ -2,8 +2,7 @@
 
 ## Description
 
-This was school project for an Assembly course at my univeristy. It is a C++ program that interfaces with assembly language routines to manipulate BMP image files. The program provides several functionalities, including converting an image to grayscale, brightening an image, and darkening an image. The imageCvt.cpp was provided for the assignment. I crafted the logic in the .asm files. ast11 is primarily about getting my .asm file to work correctly with the provided .cpp file. ast11b was an exercise to introduce us students to the importance of buffer size, as we changed the buffer capacity from 1,000,000 to 2! 
-
+This was school project for an Assembly course at my univeristy. It is a C++ program that interfaces with assembly language routines to manipulate BMP image files. The program provides several functionalities, including converting an image to grayscale, brightening an image, and darkening an image. The imageCvt.cpp was provided for the assignment. I crafted the logic in the .asm files. ast11 is primarily about getting my .asm file to work correctly with the provided .cpp file. ast11b was an exercise to introduce us students to the importance of buffer size, as we changed the buffer capacity from 1,000,000 to 2! This increased the runtime by more than a factor of 60. I've included my notes and write_up from the assignment. 
 
 
 ## Features
@@ -36,8 +35,8 @@ To run this project, you need to have `g++` installed on your machine. Use the f
     - `-dk`: Darken the image
 
 ## Usage Example
-
-Here’s how to use the program with a BMP image:
+You will need to find a .bmp formatted image you would like to edit.
+Then: 
 
 ```bash
 ./imageCvt -gr inputImage.bmp outputImage.bmp
